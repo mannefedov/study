@@ -1,7 +1,7 @@
 import csv
 
-table = open('table.csv', newline='', encoding='utf-8')
-fil = open('gimn.txt', 'r', encoding='utf-8')
+table = open('lettertable.csv', newline='', encoding='utf-8')
+fil = open('gimnofgeorgia.txt', 'r', encoding='utf-8')
 text = open('a.txt', 'w', encoding='utf-8')
 
 letters = csv.reader(table, delimiter='\t',)
