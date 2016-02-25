@@ -4,8 +4,6 @@ import lxml.html, os
 
 
 def get_links(link):
-    
-    # link = urllib.request.urlopen(link).read()
     page = lxml.html.parse(link).getroot()
     data = page.xpath('.//a/@href')
     articles = [x for x in data if '.ru/topic/' in x or '/oldnews/' in x]
@@ -69,18 +67,3 @@ if __name__ == "__main__":
         for x in urls:
             spisok.write(x + '\n')
 
-
-# Чтобы достать автора нужно: 
- # на выходе список [Мария ЕНГАЛЫЧЕВА]
-
-# Чтобы доставть время нужно:
-# 
-
-# Для заголовка:
-# 
-
-# Для текста статьи
-# 
-
-# Для ссылок:
-# data = page.xpath('.//a/@href')
