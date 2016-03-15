@@ -3,7 +3,7 @@ import os, codecs, string
 
 
 def main():
-    os.system('python WikiExtractor.py -o wiki .\zuwiki\zuwiki.xml')
+    os.system('python WikiExtractor.py -o wiki zuwiki.xml')
     text = codecs.open('.\\wiki\\AA\\wiki_00').read()
     c = Counter()
     
