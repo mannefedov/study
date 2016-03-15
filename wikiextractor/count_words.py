@@ -12,7 +12,7 @@ def main():
         if word.isalpha():
             c.update([str(word)])
     with codecs.open('word_counts.txt', 'w') as counts:
-        counts.writelines([x[0] + ': ' + str(x[1]) + '\n' for x in c.most_common()])
+        counts.writelines([x[0] + '\t' + str(x[1]) + '\n' for x in c.most_common()])
 
 if __name__ == '__main__':
     main()
