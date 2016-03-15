@@ -11,7 +11,7 @@ def main():
         word = ''.join([x.lower() for x in word if x not in string.punctuation and '<' not in word and x is not ''])
         if word.isalpha():
             c.update([str(word)])
-    with codecs.open('word_counts.txt', 'w') as counts:
+    with codecs.open('word_counts.tsv', 'w') as counts:
         counts.writelines([x[0] + '\t' + str(x[1]) + '\n' for x in c.most_common()])
 
 if __name__ == '__main__':
