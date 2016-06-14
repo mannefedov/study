@@ -45,7 +45,7 @@ class Sql_connect:
         conn = self.connect(db=db)
         try:
             with conn.cursor() as cursor:
-                c = 'SELECT' + query
+                c = 'SELECT ' + query
                 cursor.execute(c)
                 result = cursor.fetchone()
             conn.commit()
@@ -55,19 +55,16 @@ class Sql_connect:
 def main():
     sql = Sql_connect()
     db = 'Vk_Krasny_Yar_edu'
-    try:
-        sql.create_db(db)
-    except Exception:
-        pass
-    # sql.create_table(db,'meta', '`id` BIGINT NOT NULL AUTO_INCREMENT, `sex` text, PRIMARY KEY (`id`)')
-    # sql.create_table(db,'edu', '`id` BIGINT NOT NULL AUTO_INCREMENT, `education` BIGINT, PRIMARY KEY (`id`)')
+    sql.create_db(db)
+    sql.create_table(db,'meta', '`id` BIGINT NOT NULL AUTO_INCREMENT, `sex` text, PRIMARY KEY (`id`)')
+    sql.create_table(db,'edu', '`id` BIGINT NOT NULL AUTO_INCREMENT, `education` BIGINT, PRIMARY KEY (`id`)')
     meta = [x.strip('\n') for x in open('.\\corpus\\meta.csv', encoding='utf-8').readlines()[1:]]
     for line in meta:
         line = line.split(',')
         try:
-            sql.insert_data(db, 'meta', '`id`, `sex`', '`' + line[0] + '`' + ', ' + '`' + line[1] + '`')
-            if line[3] != '0':
-                sql.insert_data(db, 'edu', '`id`, `education`', '`' + line[0] + '`' + ', ' + '`' + line[3] + '`')
+            sql.insert_data(db, 'meta', '`id`, `sex`', "'" + line[0] + "'" + ', ' + "'" + line[1] + "'")
+            if line[3] not in ['0', 'None']:
+                sql.insert_data(db, 'edu', '`id`, `education`', "'" + line[0] + "'" + ', ' + "'" + line[3] + "'")
         except Exception:
             print('`' + line[0] + '`' + ', ' + '`' + line[1] + '`')
             raise
