@@ -4,10 +4,25 @@
 
 from scipy.spatial.distance import cosine
 from collections import Counter
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from scipy.stats import binned_statistic
+from gensim.models import Word2Vec as w2v
 
+# word2vec модель
+model = w2v.load_word2vec_format('news_10.bin', binary=True)
+model.similarity('полиция_S', 'милиция_S')
+
+# собираем idf по корпусу
+v = TfidfVectorizer()
+v.fit(corpus) 
+idf = v.idf_
+weights = dict(zip(v.get_feature_names(), idf))
+
+# cредняя длинна всех предложений для функции "weighted_sum"
+avg_d = sum([len(x.split()) for x in corpus])/len(corpus)
 
 # бины (bins) или группы в функциях я взял из статьи, их можно заменить на сумму всех значений или среднее
-
 
 def vec_sim(x, y):
     """близость через ворд2век"""
